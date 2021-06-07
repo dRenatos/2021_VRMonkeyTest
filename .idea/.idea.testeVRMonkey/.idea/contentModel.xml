@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Renato\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Renato\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_testeVRMonkey.-370266510.00" t="ExcludeRecursive" />
+    <e p="D:\Unity Projects\2021_VRMonkeyTest\testeVRMonkey" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="GE Common Assets" t="Include">
+          <e p="GE Orbit Camera" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="GE_OrbitCamera.cs" t="Include" />
+              <e p="GE_OrbitCameraUI.cs" t="Include" />
+            </e>
+          </e>
+          <e p="GE Toggle Full Screen" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="GE_ToggleFullScreenUI.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Readme.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="GE_UIResponder.cs" t="Include" />
+          </e>
+        </e>
+        <e p="GUI Animator" t="Include">
+          <e p="GUI Animator FREE" t="Include">
+            <e p="!How to.txt" t="Include" />
+            <e p="Demo (CSharp)" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="GA_FREE_Demo00.cs" t="Include" />
+                <e p="GA_FREE_Demo01.cs" t="Include" />
+                <e p="GA_FREE_Demo02.cs" t="Include" />
+                <e p="GA_FREE_Demo03.cs" t="Include" />
+                <e p="GA_FREE_Demo04.cs" t="Include" />
+                <e p="GA_FREE_Demo05.cs" t="Include" />
+                <e p="GA_FREE_Demo06.cs" t="Include" />
+                <e p="GA_FREE_Demo07.cs" t="Include" />
+                <e p="GA_FREE_Demo08.cs" t="Include" />
+                <e p="GA_FREE_DemoPlaySound.cs" t="Include" />
+                <e p="GA_FREE_OpenOtherScene.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Demo Basic (CSharp)" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="GUIAnimatorFREEDemo.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Readme.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="AI" t="Include">
+            <e p="AIAgent.cs" t="Include" />
+            <e p="AISight.cs" t="Include" />
+            <e p="ChaseState.cs" t="Include" />
+            <e p="EnemyEyeController.cs" t="Include" />
+            <e p="GlobalState.cs" t="Include" />
+            <e p="IdleState.cs" t="Include" />
+            <e p="IEnemyState.cs" t="Include" />
+            <e p="LookerIdleState.cs" t="Include" />
+            <e p="SeekState.cs" t="Include" />
+            <e p="StunnedState.cs" t="Include" />
+          </e>
+          <e p="AreaLoaderScript.cs" t="Include" />
+          <e p="BatteryPickup.cs" t="Include" />
+          <e p="Character.cs" t="Include" />
+          <e p="CharacterNavigationController.cs" t="Include" />
+          <e p="Checkpoint.cs" t="Include" />
+          <e p="ConsoleText.cs" t="Include" />
+          <e p="DamageArea.cs" t="Include" />
+          <e p="Door.cs" t="Include" />
+          <e p="Effects" t="Include">
+            <e p="AutoDeleteParticleEmitter.cs" t="Include" />
+          </e>
+          <e p="GameLogic.cs" t="Include" />
+          <e p="HidingSpot.cs" t="Include" />
+          <e p="Key.cs" t="Include" />
+          <e p="LevelLayerManager.cs" t="Include" />
+          <e p="MainMenu.cs" t="Include" />
+          <e p="Managers" t="Include">
+            <e p="AudioManager.cs" t="Include" />
+            <e p="EffectsManager.cs" t="Include" />
+            <e p="HUDManager.cs" t="Include" />
+          </e>
+          <e p="PatrolNode.cs" t="Include" />
+          <e p="ProgressBar.cs" t="Include" />
+          <e p="RobotThreadController.cs" t="Include" />
+          <e p="SetPhysicsCollisions.cs" t="Include" />
+          <e p="ShockArea.cs" t="Include" />
+          <e p="ShockDamageArea.cs" t="Include" />
+          <e p="ShowMessageBox.cs" t="Include" />
+          <e p="Spin.cs" t="Include" />
+          <e p="StealthPlayerController.cs" t="Include" />
+          <e p="SuperBattery.cs" t="Include" />
+          <e p="TopDownCamera.cs" t="Include" />
+          <e p="Upgrade.cs" t="Include" />
+        </e>
+        <e p="Standard Assets" t="Include">
+          <e p="Effects" t="Include">
+            <e p="GlassRefraction" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="GlassStainedBumpDistort.shader" t="Include" />
+              </e>
+            </e>
+            <e p="ImageEffects" t="Include">
+              <e p="Readme.txt" t="Include" />
+              <e p="Scripts" t="Include">
+                <e p="PostEffectsBase.cs" t="Include" />
+                <e p="Tonemapping.cs" t="Include" />
+              </e>
+              <e p="Shaders" t="Include">
+                <e p="Tonemapper.shader" t="Include" />
+              </e>
+            </e>
+            <e p="Projectors" t="Include">
+              <e p="Guidelines.txt" t="Include" />
+              <e p="Shaders" t="Include">
+                <e p="ProjectorLight.shader" t="Include" />
+                <e p="ProjectorMultiply.shader" t="Include" />
+              </e>
+            </e>
+            <e p="TessellationShaders" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="BumpedSpecularDisplacement.shader" t="Include" />
+                <e p="BumpedSpecularSmooth.shader" t="Include" />
+              </e>
+            </e>
+            <e p="ToonShading" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="ToonBasic.shader" t="Include" />
+                <e p="ToonBasicOutline.shader" t="Include" />
+                <e p="ToonLit.shader" t="Include" />
+                <e p="ToonLitOutline.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="StoreAssets" t="Include">
+          <e p="Elemental Free" t="Include">
+            <e p="Readme.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="GE_ELF_Demo.cs" t="Include" />
+            </e>
+          </e>
+          <e p="HardShellStudios" t="Include">
+            <e p="First Person Controller" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Player_Look.cs" t="Include" />
+                <e p="Player_Move.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Input Manager" t="Include">
+              <e p="Editor" t="Include">
+                <e p="hardInputEditor.cs" t="Include" />
+                <e p="hardUIEditor.cs" t="Include" />
+              </e>
+              <e p="Examples" t="Include">
+                <e p="UI_Manager.cs" t="Include" />
+              </e>
+              <e p="Readme.txt" t="Include" />
+              <e p="Scripts" t="Include">
+                <e p="hardInput.cs" t="Include" />
+                <e p="hardInputUI.cs" t="Include" />
+                <e p="hardKey.cs" t="Include" />
+                <e p="hardManager.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="SabreCSG-master" t="Include">
+            <e p="Changelog.txt" t="Include" />
+            <e p="Internal" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="BrushPreview.shader" t="Include" />
+                <e p="Grayscale-GUITexture.shader" t="Include" />
+              </e>
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="Brushes" t="Include">
+                <e p="CompoundBrush.cs" t="Include" />
+                <e p="CompoundBrushes" t="Include">
+                  <e p="Editor" t="Include">
+                    <e p="StairBrushInspector.cs" t="Include" />
+                  </e>
+                  <e p="StairBrush.cs" t="Include" />
+                </e>
+                <e p="PrimitiveBrush.cs" t="Include" />
+              </e>
+              <e p="CallbackEvents.cs" t="Include" />
+              <e p="Core" t="Include">
+                <e p="BrushBase.cs" t="Include" />
+                <e p="BuildEngine" t="Include">
+                  <e p="BrushBuilder.cs" t="Include" />
+                  <e p="BrushCache.cs" t="Include" />
+                  <e p="CSGFactory.cs" t="Include" />
+                  <e p="MeshGroupManager.cs" t="Include" />
+                  <e p="Optimizer.cs" t="Include" />
+                  <e p="TriangulationNode.cs" t="Include" />
+                </e>
+                <e p="BuildMetrics.cs" t="Include" />
+                <e p="CSG" t="Include">
+                  <e p="Brush.cs" t="Include" />
+                  <e p="BrushChunk.cs" t="Include" />
+                  <e p="Edge.cs" t="Include" />
+                  <e p="Polygon.cs" t="Include" />
+                  <e p="Vertex.cs" t="Include" />
+                  <e p="VertexList.cs" t="Include" />
+                </e>
+                <e p="CSGBuildContext.cs" t="Include" />
+                <e p="CSGBuildSettings.cs" t="Include" />
+                <e p="Debugging" t="Include">
+                  <e p="DebugTimer.cs" t="Include" />
+                </e>
+                <e p="Dictionaries" t="Include">
+                  <e p="MaterialMeshDictionary.cs" t="Include" />
+                </e>
+                <e p="IDeepCopyable.cs" t="Include" />
+                <e p="MeshExtensions.cs" t="Include" />
+                <e p="PolygonEntry.cs" t="Include" />
+                <e p="PolygonFactory.cs" t="Include" />
+                <e p="SerializablePlane.cs" t="Include" />
+              </e>
+              <e p="CSGModel.cs" t="Include" />
+              <e p="CSGModelBase.cs" t="Include" />
+              <e p="CSGModelRuntime.cs" t="Include" />
+              <e p="CurrentSettings.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="ExpandPropertiesDrawer.cs" t="Include" />
+                <e p="Inspectors" t="Include">
+                  <e p="BrushBaseInspector.cs" t="Include" />
+                  <e p="CompoundBrushInspector.cs" t="Include" />
+                  <e p="CSGBuildContextInspector.cs" t="Include" />
+                  <e p="CSGModelInspector.cs" t="Include" />
+                  <e p="KeyMappingsInspector.cs" t="Include" />
+                  <e p="PrimitiveBrushInspector.cs" t="Include" />
+                </e>
+                <e p="NamedVerticalScope.cs" t="Include" />
+                <e p="Utilities" t="Include">
+                  <e p="UtilityShortcuts.cs" t="Include" />
+                </e>
+              </e>
+              <e p="ExpandPropertiesAttribute.cs.cs" t="Include" />
+              <e p="Extensions" t="Include">
+                <e p="ColorHex.cs" t="Include" />
+                <e p="EditorHelper.cs" t="Include" />
+                <e p="EnumHelper.cs" t="Include" />
+                <e p="Extensions.cs" t="Include" />
+                <e p="MathHelper.cs" t="Include" />
+                <e p="Matrices" t="Include">
+                  <e p="Matrix2x2.cs" t="Include" />
+                  <e p="Matrix3x2.cs" t="Include" />
+                </e>
+                <e p="StringHelper.cs" t="Include" />
+                <e p="TransformData.cs" t="Include" />
+                <e p="TransformHelper.cs" t="Include" />
+                <e p="WorldTransformData.cs" t="Include" />
+              </e>
+              <e p="Geometry" t="Include">
+                <e p="AdjacencyFilters.cs" t="Include" />
+                <e p="AdjacencyHelper.cs" t="Include" />
+                <e p="BrushFactory.cs" t="Include" />
+                <e p="GeometryHelper.cs" t="Include" />
+                <e p="MeshHelper.cs" t="Include" />
+                <e p="OBJFactory.cs" t="Include" />
+                <e p="OBJVertexList.cs" t="Include" />
+                <e p="UVUtility.cs" t="Include" />
+              </e>
+              <e p="Input" t="Include">
+                <e p="EditorKeyMappings.cs" t="Include" />
+                <e p="KeyMappings.cs" t="Include" />
+              </e>
+              <e p="IPostBuildListener.cs" t="Include" />
+              <e p="LinearFPSCam.cs" t="Include" />
+              <e p="Pair.cs" t="Include" />
+              <e p="Tools" t="Include">
+                <e p="ClipEditor.cs" t="Include" />
+                <e p="DrawEditor.cs" t="Include" />
+                <e p="EdgeEditor.cs" t="Include" />
+                <e p="ResizeEditor.cs" t="Include" />
+                <e p="ResizeHandlePair.cs" t="Include" />
+                <e p="SurfaceEditor.cs" t="Include" />
+                <e p="Tool.cs" t="Include" />
+                <e p="TransformModelEditor.cs" t="Include" />
+                <e p="Utilities" t="Include">
+                  <e p="BrushUtility.cs" t="Include" />
+                  <e p="ClipUtility.cs" t="Include" />
+                  <e p="DrawUtility.cs" t="Include" />
+                  <e p="EdgeUtility.cs" t="Include" />
+                  <e p="SurfaceUtility.cs" t="Include" />
+                  <e p="Vertex Weld Ops" t="Include">
+                    <e p="VertexWeldCentroidOperation.cs" t="Include" />
+                    <e p="VertexWeldOperation.cs" t="Include" />
+                    <e p="VertexWeldToleranceOperation.cs" t="Include" />
+                  </e>
+                  <e p="VertexUtility.cs" t="Include" />
+                </e>
+                <e p="VertexEditor.cs" t="Include" />
+              </e>
+              <e p="UI" t="Include">
+                <e p="CSGGrid.cs" t="Include" />
+                <e p="GridManager.cs" t="Include" />
+                <e p="MaterialPaletteWindow.cs" t="Include" />
+                <e p="PaletteWindow.cs" t="Include" />
+                <e p="RadialMenu.cs" t="Include" />
+                <e p="SabreCSGPreferences.cs" t="Include" />
+                <e p="SabreCSGResources.cs" t="Include" />
+                <e p="SabreGraphics.cs" t="Include" />
+                <e p="SabreGUIHelper.cs" t="Include" />
+                <e p="SabreGUILayout.cs" t="Include" />
+                <e p="SabreInput.cs" t="Include" />
+                <e p="SabreMouse.cs" t="Include" />
+                <e p="Toolbar.cs" t="Include" />
+                <e p="VertexColorWindow.cs" t="Include" />
+              </e>
+              <e p="UpdateUtility.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="Diffuse-VertexColored.shader" t="Include" />
+              <e p="Diffuse-VertexColoredLit.shader" t="Include" />
+              <e p="Handle.shader" t="Include" />
+              <e p="Line.shader" t="Include" />
+              <e p="LineDashed.shader" t="Include" />
+              <e p="LineDashedAlpha.shader" t="Include" />
+              <e p="Plane.shader" t="Include" />
+              <e p="Preview.shader" t="Include" />
+              <e p="SeeExcluded.shader" t="Include" />
+              <e p="Tri-Planar.shader" t="Include" />
+              <e p="UINoAlpha.shader" t="Include" />
+              <e p="VertexTinted.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Volumetric Lights" t="Include">
+          <e p="Editor" t="Include">
+            <e p="ImageEffects" t="Include">
+              <e p="TonemappingEditor.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="VolumetricLight.cs" t="Include" />
+            <e p="VolumetricLightRenderer.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="BilateralBlur.shader" t="Include" />
+            <e p="BlitAdd.shader" t="Include" />
+            <e p="VolumetricLight.shader" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="testeVRMonkey.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
