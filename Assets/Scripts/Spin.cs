@@ -7,7 +7,7 @@ public class Spin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(spinRoutine());
+        // StartCoroutine(spinRoutine());
     }
 
     // Update is called once per frame
