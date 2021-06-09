@@ -6,8 +6,6 @@ public class AudioManager : MonoBehaviour {
 
     static AudioManager _instance;
 
-
-
     public static AudioManager getInstance()
     {
         if (_instance == null)
@@ -20,4 +18,5 @@ public class AudioManager : MonoBehaviour {
 
     public AudioClip enemyAlert;
     public AudioClip playerHit;
+    public AudioClip commonHit;
 }

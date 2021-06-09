@@ -20,8 +20,6 @@ public class AIAgent : MonoBehaviour {
     public SeekState seekingState= new SeekState();
     public IEnemyState damagedState;
 
-
-
     public CharacterNavigationController navAgent;
     public AISight aiSight;
     public bool alertAllies = true;
@@ -82,6 +80,8 @@ public class AIAgent : MonoBehaviour {
         patrolPost.position = transform.position;
 
         //aiSight = GetComponentInChildren<AISight>();
+        character.OnReceiveDamage += OnGetShoot;
+
     }
 
     public void Restart()
@@ -173,6 +173,16 @@ public class AIAgent : MonoBehaviour {
         return true;
     }
 
+    public void OnGetShoot()
+    {
+        StopAllCoroutines();
+        searchLight.enabled = false;
+        aiEnabled = false;
+        SetEnergyFraction(0);
+        player.DrainOver();
+        setState(new IdleState());
+    }
+
     public IEnumerator DrainRoutine()
     {
         while (character.energyLeft>0)
@@ -192,9 +202,8 @@ public class AIAgent : MonoBehaviour {
     {
         bodyRenderer.material.SetColor("_EmissionColor", Color.white*fraction);
         searchLight.range = maxLightRange * fraction;
-        aiSight.viewDistance = maxSightRange * fraction;
-
     }
+    
     public void OnDrainEnd()
     {
         StopCoroutine("DrainRoutine");
