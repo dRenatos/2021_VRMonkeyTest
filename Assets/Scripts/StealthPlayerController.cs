@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StealthPlayerController : Character {
+public class StealthPlayerController : Character
+{
 
-    
     Camera cam;
     public Rigidbody rb;
 
@@ -16,8 +17,7 @@ public class StealthPlayerController : Character {
 
     public bool hidden;
 
-    [Header("Movement Speed")]
-    Vector3 inputVector;
+    [Header("Movement Speed")] Vector3 inputVector;
     public bool infiniteFriction;
     public float friction = 3.0f;
 
@@ -31,8 +31,7 @@ public class StealthPlayerController : Character {
     public float threadWalkSpeed = 0.5f;
     public float threadRunSpeed = 0.75f;
 
-    [Header("Rotation")]
-    public float rotateSpeed = 5.0f;
+    [Header("Rotation")] public float rotateSpeed = 5.0f;
     public bool instanteRotate = true;
     bool rotating = false;
     public bool lockMovementRotation = false;
@@ -41,9 +40,7 @@ public class StealthPlayerController : Character {
     public float maxAngleDiffToMove = 10.0f;
     float angleDiff;
 
-    [Header("Energy")]
-
-    bool moving = false;
+    [Header("Energy")] bool moving = false;
     public bool enableEnergyDrain = false;
     public float maxEnergy = 50;
     public float energy = 50;
@@ -52,12 +49,12 @@ public class StealthPlayerController : Character {
     public float energyDrainSpeed = 5;
     public float standingEnergyMultiplier = 0.5f;
     public ProgressBar energyBar;
-    [Header("Skills")]
-    public bool cloaked = false;
+    [Header("Skills")] public bool cloaked = false;
     public bool running = false;
     public float runningSpeedMultiplier = 1.5f;
     public float runningEnergyMultiplier = 1.5f;
     public float cloakingEnergyMultiplier = 3.5f;
+    public float floatingEnergyMultiplier = 3.5f;
     public float drainingEnergyMultiplier = 4.0f;
     public float shockDelay = 0.3f;
     public float shockCost = 10;
@@ -70,19 +67,37 @@ public class StealthPlayerController : Character {
 
     public AIAgent drainTarget;
 
-    [Header("Effects")]
-    public ParticleSystem walkParticles;
+    [Header("Effects")] public ParticleSystem walkParticles;
     public ParticleSystem runParticles;
 
-    [Header("Upgrades")]
-    public bool canShock = false;
+    [Header("Upgrades")] public bool canShock = false;
     public bool canCloak = false;
     public bool canDrain = false;
+    public bool canShoot;
+    public bool canFloat;
 
     public ParticleSystem warpParticles;
-    
+    private PlayerShootData _playerShootData;
 
     static StealthPlayerController _instance;
+    private Coroutine floatRobotCoroutine;
+    private float initialYPosition;
+    
+    [Header("Float Properties")]
+    public float floatYAmount = 2.0f;
+    public float floatAnimationTime = 1.0f;
+    public ParticleSystem floatingParticles;
+    public float initialParticleSize;
+    public float finalParticleSize;
+    public float initialParticleSpeed;
+    public float finalParticleSpeed;
+    public float initialSoundPitch;
+    public float finalSoundPitch;
+    public AudioClip floatingSFX;
+    
+    private bool floated;
+    
+    
     public static StealthPlayerController getInstance()
     {
         if (_instance == null)
@@ -94,7 +109,8 @@ public class StealthPlayerController : Character {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         audioSource = GetComponent<AudioSource>();
         cam = Camera.main;
         rb = GetComponent<Rigidbody>();
@@ -106,8 +122,11 @@ public class StealthPlayerController : Character {
         {
             energyBar.SetInitialValues(maxEnergy, 0, energy);
         }
-	}
-	
+
+        _playerShootData = (PlayerShootData) shootData;
+        initialYPosition = transform.position.y;
+    }
+
     public void SetEnergy(float val)
     {
         energy = val;
@@ -135,7 +154,7 @@ public class StealthPlayerController : Character {
         energy = Mathf.Min(maxEnergy, energy);
         energyBar.UpdateBar(energy);
 
-        UpdateEnergyColor(energy/maxEnergy);
+        UpdateEnergyColor(energy / maxEnergy);
         if (energy <= 0)
         {
             GameLogic.instance.GameOver();
@@ -144,9 +163,10 @@ public class StealthPlayerController : Character {
 
     void UpdateEnergyColor(float fraction)
     {
-       normalRenderer.material.SetColor("_EmissionColor", Color.white * fraction);
-       cloakedRenderer.material.SetColor("_EmissionColor", Color.white * fraction);
+        normalRenderer.material.SetColor("_EmissionColor", Color.white * fraction);
+        cloakedRenderer.material.SetColor("_EmissionColor", Color.white * fraction);
     }
+
     IEnumerator shockRoutine()
     {
         yield return new WaitForSeconds(shockDelay);
@@ -165,7 +185,7 @@ public class StealthPlayerController : Character {
         {
             drainTarget.OnDrainEnd();
         }
-        
+
         SetState(States.idle);
         drainObject.SetActive(false);
     }
@@ -177,6 +197,7 @@ public class StealthPlayerController : Character {
         {
             runParticles.Stop();
         }
+
         if (walkParticles.isPlaying)
         {
             walkParticles.Stop();
@@ -184,7 +205,8 @@ public class StealthPlayerController : Character {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (GameLogic.instance.gameState != GameLogic.GameStates.gameplay)
         {
             return;
@@ -192,7 +214,8 @@ public class StealthPlayerController : Character {
 
         if (state == States.attacking)
         {
-            if (!Input.GetButton("Drain")){
+            if (!Input.GetButton("Drain"))
+            {
                 StopDrain();
             }
         }
@@ -203,25 +226,28 @@ public class StealthPlayerController : Character {
             drainObject.SetActive(true);
             SetState(States.attacking);
             RaycastHit hit;
-            if(Physics.Raycast(transform.position,transform.forward,out hit, drainRange, enemyLayerMask))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, drainRange, enemyLayerMask))
             {
                 Debug.Log("Hit " + hit.transform.gameObject.name);
                 AIAgent agent = hit.transform.gameObject.GetComponent<AIAgent>();
-                if(agent!=null && agent.aiSight.sightState != AISight.SightStates.seeingEnemy){
+                if (agent != null && agent.aiSight.sightState != AISight.SightStates.seeingEnemy)
+                {
                     agent.OnDrainStart();
                     Debug.Log("Draining ");
-                   // drainObject.SetActive(true);
-                   // SetState(States.attacking);
+                    // drainObject.SetActive(true);
+                    // SetState(States.attacking);
                     drainTarget = agent;
                 }
 
-            }else
+            }
+            else
             {
                 Debug.Log("No hit");
             }
         }
 
-        if (canShock && energy >= shockCost && Input.GetButtonDown("Shock") && (state == States.idle || state == States.moving))
+        if (canShock && energy >= shockCost && Input.GetButtonDown("Shock") &&
+            (state == States.idle || state == States.moving))
         {
 
             SpendEnergy(shockCost);
@@ -232,6 +258,63 @@ public class StealthPlayerController : Character {
             thisShockObject.transform.position = transform.position;
             StartCoroutine(shockRoutine());
 
+        }
+
+        if (canShoot && energy >= _playerShootData.BulletEnergyCost && Input.GetButtonDown(_playerShootData.BtnName) &&
+            (state == States.idle || state == States.moving))
+        {
+            SpendEnergy(_playerShootData.BulletEnergyCost);
+            Fire();
+        }
+
+        if (canFloat && Input.GetButtonDown("Float") && (state == States.idle || state == States.moving || state == States.floating))
+        {
+            if (floatRobotCoroutine != null)
+            {
+                StopCoroutine(floatRobotCoroutine);
+            }
+            
+            SetState(States.floating);
+            threadController.moving = false;
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.useGravity = false;
+            floatRobotCoroutine = StartCoroutine(FloatRobot(floatYAmount + initialYPosition, OnUpdate: (value) =>
+            {
+                OnFloatApplySoundPitch(value, finalSoundPitch, initialSoundPitch);
+                OnFloatApplyParticleFX(value, finalParticleSpeed, initialParticleSpeed,finalParticleSize, initialParticleSize);
+            }));
+            audioSource.clip = floatingSFX;
+            audioSource.loop = true; 
+            audioSource.Play();
+            floatingParticles.Play();
+            floated = true;
+        }
+        else
+        {
+            if (floated && !Input.GetButton("Float"))
+            {
+                if (floatRobotCoroutine != null)
+                {
+                    StopCoroutine(floatRobotCoroutine);
+                }
+                
+                floatRobotCoroutine = StartCoroutine(FloatRobot(initialYPosition, () =>
+                {
+                    SetState(States.idle);
+                    rb.isKinematic = false;
+                    rb.useGravity = true;
+                    floatingParticles.Stop();
+                    audioSource.Stop();
+                    audioSource.loop = false;
+                    audioSource.clip = null;
+                }, value =>
+                {
+                    OnFloatApplySoundPitch(value, initialSoundPitch, finalSoundPitch);
+                    OnFloatApplyParticleFX(value, initialParticleSpeed, finalParticleSpeed, initialParticleSize, finalParticleSize);
+                }));
+                floated = false;
+            }
         }
 
         if (canCloak && Input.GetButtonDown("Cloak") && (state == States.idle || state == States.moving))
@@ -251,14 +334,9 @@ public class StealthPlayerController : Character {
                 cloakedModel.SetActive(false);
             }
         }
-        
-
 
         if (state == States.idle && !cloaked)
         {
- 
-        
-
             moving = false;
             inputVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             inputVector = Vector3.ClampMagnitude(inputVector, 1.0f);
@@ -292,11 +370,12 @@ public class StealthPlayerController : Character {
                     {
                         runParticles.Stop();
                     }
+
                     if (!walkParticles.isPlaying)
                     {
                         walkParticles.Play();
                     }
-                    
+
                 }
                 else
                 {
@@ -304,11 +383,12 @@ public class StealthPlayerController : Character {
                     {
                         walkParticles.Stop();
                     }
+
                     if (!runParticles.isPlaying)
                     {
                         runParticles.Play();
                     }
-                    
+
                 }
 
 
@@ -322,22 +402,25 @@ public class StealthPlayerController : Character {
                 {
                     walkParticles.Stop();
                 }
+
                 if (runParticles.isPlaying)
                 {
                     runParticles.Stop();
                 }
-                
+
                 threadController.moving = false;
             }
         }
+
         if (enableEnergyDrain)
         {
-            float energyDrain= energyDrainSpeed * Time.deltaTime;
+            float energyDrain = energyDrainSpeed * Time.deltaTime;
 
             if (energy <= maxEnergy * lowEnergyFraction)
             {
                 energyDrain = energyDrain * lowEnergyMultiplier;
             }
+
             if (running)
             {
                 energyDrain = energyDrain * runningEnergyMultiplier;
@@ -347,13 +430,18 @@ public class StealthPlayerController : Character {
             {
                 energyDrain = energyDrain * cloakingEnergyMultiplier;
             }
-
+            
+            if(floated)
+            {
+                energyDrain = energyDrain * cloakingEnergyMultiplier;
+            }
+            
             if (!moving)
             {
                 energyDrain = energyDrain * standingEnergyMultiplier;
             }
 
-            if(state==States.attacking)
+            if (state == States.attacking)
             {
                 if (drainTarget == null)
                 {
@@ -363,7 +451,7 @@ public class StealthPlayerController : Character {
                 {
                     energyDrain = 0;
                 }
-                
+
             }
 
             energy -= energyDrain;
@@ -374,17 +462,64 @@ public class StealthPlayerController : Character {
                 GameLogic.instance.GameOver();
             }
         }
-        
+
     }
 
-    public ParticleSystem damageParticle;
+    private bool IsUnderFloor()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        Physics.SphereCast(ray, 0.72f, out RaycastHit hitInfo, floatYAmount + 1, gameObject.layer);
+        Debug.Log(hitInfo.collider.gameObject.name);
+        return true;
+    }
+
+    private void OnFloatApplySoundPitch(float lerpValue, float sizeUpperBound, float sizeLowerBound)
+    {
+        var lerpedPitch = Mathf.Lerp(sizeLowerBound, sizeUpperBound, lerpValue);
+        audioSource.pitch = lerpedPitch;
+    }
+
+    private void OnFloatApplyParticleFX(float lerpvalue, float speedUpperBound, float speedLowerBound, float sizeUpperBound, float sizeLowerBound)
+    {
+        var lerpedSpeed = Mathf.Lerp(speedLowerBound, speedUpperBound, lerpvalue);
+        var lerpedSize = Mathf.Lerp(sizeLowerBound, sizeUpperBound, lerpvalue);
+        var floatingParticlesMain = floatingParticles.main;
+        floatingParticlesMain.simulationSpeed = lerpedSpeed;
+        floatingParticlesMain.startSize = lerpedSize;
+    }
+    
+    private IEnumerator FloatRobot(float yDestination, Action onFinish = null, Action<float> OnUpdate = null)
+    {
+        var initialY = transform.position.y;
+        var finalY = yDestination;
+        var currentPosition = transform.position;
+        var animationTime = GetAnimationTime(yDestination != initialYPosition);
+        var currentAnimationTime = 0.0f;
+        while (animationTime > currentAnimationTime)
+        {
+            var inversedLerpTime = Mathf.InverseLerp(0, animationTime, currentAnimationTime);
+            var lerpedY = Mathf.Lerp(initialY, finalY, inversedLerpTime);
+            currentPosition.y = lerpedY;
+            transform.position = currentPosition;
+            currentAnimationTime += Time.deltaTime;
+            OnUpdate?.Invoke(inversedLerpTime);
+            yield return new WaitForEndOfFrame();
+        }
+        onFinish?.Invoke();
+        floatRobotCoroutine = null;
+    }
+
+    private float GetAnimationTime(bool direction)
+    {
+        var finalPoint = direction ? initialYPosition + floatYAmount : initialYPosition;
+        var yDistance = Mathf.Abs(transform.position.y - finalPoint);
+        var inversedLerpDistance = Mathf.InverseLerp(0, floatYAmount, yDistance);
+        return Mathf.Lerp(0, floatAnimationTime, inversedLerpDistance);
+    }
 
     public override void DealDamage(float val)
     {
-        audioSource.PlayOneShot(AudioManager.getInstance().playerHit);
-        damageParticle.Play();
-
-        base.DealDamage(val);
+        DealDamage(val, AudioManager.getInstance().playerHit);
         SpendEnergy(val);
     }
 
