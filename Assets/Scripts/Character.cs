@@ -13,7 +13,7 @@ public class Character : MonoBehaviour {
     public bool friend = false;
     public Transform target;
     public ParticleSystem damageParticle;
-
+	
     public float maxDrainEnergy = 10;
     public float energyLeft = 10;
 

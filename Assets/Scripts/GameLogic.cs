@@ -28,7 +28,9 @@ public class GameLogic : MonoBehaviour {
     public GameObject ShockText;
     public GameObject CloakText;
     public GameObject DrainText;
-
+    public GameObject ShootText;
+    public GameObject FloatText;
+    
     public GameObject enemyContainer;
     public GameObject enemyModel;
     //Here is a private reference only this class can access
@@ -200,6 +202,14 @@ public class GameLogic : MonoBehaviour {
                 player.canDrain = true;
                 DrainText.SetActive(true);
                 break;
+            case Upgrade.Type.shoot:
+                player.canShoot = true;
+                ShootText.SetActive(true);
+                break;
+            case Upgrade.Type.levitate:
+                player.canFloat = true;
+                FloatText.SetActive(true);
+                break;
         }
 
         StartCoroutine(EnablePlayerSkillRoutine(upgradeType));
@@ -221,6 +231,14 @@ public class GameLogic : MonoBehaviour {
                     break;
                 case Upgrade.Type.drain:
                     ShowMessageBox("You acquired the DRAIN power! Press V to drain enemies' energy! ONLY WORKS ON UNAWARE ENEMIES");
+                    player.canDrain = true;
+                    break;
+                case Upgrade.Type.shoot:
+                    ShowMessageBox("You acquired the SHOOT power! Press Q to shoot in your enemies. ");
+                    player.canDrain = true;
+                    break;
+                case Upgrade.Type.levitate:
+                    ShowMessageBox("You acquired the FLOAT power! Press E to float!");
                     player.canDrain = true;
                     break;
             }
